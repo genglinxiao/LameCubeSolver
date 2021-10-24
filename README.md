@@ -14,6 +14,8 @@ Now, we would like to simulate this process with an algorithm and generalize the
 
 ## Useful Links
 https://github.com/benbotto/rubiks-cube-cracker - C++ Optimal Cube Solver using Korf algorithm, basically IDA* with a heuristic function that employes a pattern database.
+
 https://github.com/abau171/cubetree - Korf in python.
+
 https://github.com/pglass/cube - Cuber Solver that follows the standard cube manual.
 
