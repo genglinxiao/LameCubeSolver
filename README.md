@@ -2,7 +2,7 @@
 A Cube Solver that cannot see the shortest path in most cases.
 
 ## Inspiration
-Humans, enven the speedcubers, solve the Rubik's cube in ways that are different from optimal solutions found by computer algorithms. One key difference is, humans split the task of solving the cube by stages, most naturally by layers that been restored/solved. In contrast, for computer algorithms, all the states of the cube are equal, except the initial state and the goal state.
+Humans, enven the speedcubers, solve the Rubik's cube in ways that are different from optimal solutions found by computer algorithms. One key difference is, humans split the task of solving the cube by stages/milestones, most naturally by layers that been restored/solved. In contrast, for computer algorithms, all the states of the cube are equal, except the initial state and the goal state.
 We would argue that, it is this ability to decomposing an ultimate goal into mail stones that enables human brain, with limited working memory and speed, to solve something as complex as the Rubik's cube.
 Now, we would like to simulate this process with an algorithm and generalize the approach.
 ## Goals
