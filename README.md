@@ -10,3 +10,10 @@ Now, we would like to simulate this process with an algorithm and generalize the
 2. Identify action combinations that achieve the goal from one mailstone to the next, together with the cost(steps of primitive actions) and side effects(other pieces get moved).
 3. Finding optimal solutions of a cube using the action combinations identified by 2.
 4. Come up with different definition of mailstones.
+
+
+## Useful Links
+https://github.com/benbotto/rubiks-cube-cracker - C++ Optimal Cube Solver using Korf algorithm, basically IDA* with a heuristic function that employes a pattern database.
+https://github.com/abau171/cubetree - Korf in python.
+https://github.com/pglass/cube - Cuber Solver that follows the standard cube manual.
+
