@@ -19,4 +19,6 @@ https://github.com/abau171/cubetree - Korf in python.
 
 https://github.com/pglass/cube - Cuber Solver that follows the standard cube manual.
 
-https://github.com/geof90/rubiks - A web based simulator. We might use this for demonstration.
+https://github.com/geof90/rubiks - A web based simulator.
+
+https://github.com/hkociemba/CubeExplorer - CubeExplorer, has basically all the things we wanted, except the layer by layer part. We will use this as our simulator.
