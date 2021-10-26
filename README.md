@@ -27,7 +27,13 @@ https://github.com/hkociemba/CubeExplorer - CubeExplorer, has basically all the 
 1. Any combination of actions, repeatedly applied to a cube, will bring the cube back to its original configuration.
 
 R'LUUDDFB'R'U"L'F' - 336 =2^4 × 3 × 7
+
 F'U'B'UUDFBBL'F'D' - 630, with 90 as a minor period. 630 = 2 x 3^2 x 5 x 7
+
 U'R' - 105 = 3 x 5 x 7
+
 RUF - 80 = 2^4 x 5
+
 RUFR' - 105 = 3 x 5 x 7
+
+L'DFDR'U'D'FUD'FDLDDR'LLD'BBD - 66 = 2 x 3 x 11
