@@ -40,5 +40,6 @@ L'DFDR'U'D'FUD'FDLDDR'LLD'BBD - 66 = 2 x 3 x 11
 
 FFUFD - 40 = 2^3 x 5
 FFUFL - 420 = 2^2 x 3 x 5 x 7
-
-
+RDBFUL - 36 = 2^2 x 3^3
+RDBFU - 36 = 2^2 x 3^3
+RDBFFU - 90 = 2 x 3^2 x 5
