@@ -37,3 +37,8 @@ RUF - 80 = 2^4 x 5
 RUFR' - 105 = 3 x 5 x 7
 
 L'DFDR'U'D'FUD'FDLDDR'LLD'BBD - 66 = 2 x 3 x 11
+
+FFUFD - 40 = 2^3 x 5
+FFUFL - 420 = 2^2 x 3 x 5 x 7
+
+
