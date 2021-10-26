@@ -51,3 +51,4 @@ RDBFFU - 90 = 2 x 3^2 x 5
 UFDBRB'RD'F'U'B'R'BR' - 2 = 2 这个动作组合将两个edge互换，而且是互换两个edge的最优解。
 
 RDFUDB - 84 = 2^2 x 3 x 7
+UURBULU'FUUF'L'U'B'UR' - 2 = 2 这个动作将两对Eduge互换
