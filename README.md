@@ -54,3 +54,5 @@ RDFUDB - 84 = 2^2 x 3 x 7
 UURBULU'FUUF'L'U'B'UR' - 2 = 2 这个动作将两对Eduge互换
 RFRU'R'D'LDRUBUUD'L'D'LBU'L - 66 = 2 x 3 x 11
 RB'R'FB'RRU'R'U'D'R'LDR'DF'LD'L' - 336 = 2^4 x 3 x 7
+R' D' L U R D L' U' L' D L R D L B' B' F' L U R U' - 24 = 2^3 x 3
+F L R D' R F' U R D R' D B' L' R' B' L' B L' F U R U' - 48 = 2^4 x 3
