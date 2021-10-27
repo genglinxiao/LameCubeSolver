@@ -53,3 +53,4 @@ UFDBRB'RD'F'U'B'R'BR' - 2 = 2 这个动作组合将两个edge互换，而且是�
 RDFUDB - 84 = 2^2 x 3 x 7
 UURBULU'FUUF'L'U'B'UR' - 2 = 2 这个动作将两对Eduge互换
 RFRU'R'D'LDRUBUUD'L'D'LBU'L - 66 = 2 x 3 x 11
+RB'R'FB'RRU'R'U'D'R'LDR'DF'LD'L' - 336 = 2^4 x 3 x 7
