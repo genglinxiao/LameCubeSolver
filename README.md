@@ -23,6 +23,39 @@ https://github.com/geof90/rubiks - A web based simulator.
 
 https://github.com/hkociemba/CubeExplorer - CubeExplorer, has basically all the things we wanted, except the layer by layer part. We will use this as our simulator.
 
+## Ideas
+1. How to define stages in a hierachical planning in general.
+
+Humans intuitively define the mile stones towards a goal.
+In the case of Rubik's Cube, it can be measured as how well-scrambled the cube is.
+In this sense, the entropy is a good measure here. Though some configuraiton looks very well-ordered, for example only 2 edged pieces were swaps, may needs as many as 16 steps to solve. But human approach rarely end up with the shortest path anyway.
+
+2. The Entrop of a Rubik's cube.
+The most straight-forward way of defining the cube's entropy would be to go through each of the 54 stickers. If it is in place, that is a 1/6 probability; If it is not, that is a 5/6 probability. The entropy would be:
+
+Sum54( p * log(p) )
+
+However, that is a poor definition because the distribution of colors is actually not unified. After all, corner pieces will always be corner cases, edge pieces will always be edge pieces, center pieces will not move (in our setup). So, 8 corner pieces, each can be in each 3 orientations, that's 24 possibilities. 12 edges, each can be orientated in 2 ways, that's 24 possibilities. So the entropy of a given cube is:
+Sum8( p1 * log(p1) ) + Sum12( p2 * log(p2) )
+p1 is the possibility of a corner piece, if it's in the right place and right orientation, then that's 1/24. Otherwise, that's 23/24.
+p2 is the possibility of a edge piece, if it's is in the right place and right orientation, then that's 1/24. Otherwise, that's 23/24.
+
+3. How to solve between stages.
+
+In theory, we can always rely on a search. However, given a branching factor of 11, and we know that evern some simple deviation from a goal state may needs more than 10 steps, simple search is not the optimal solution.
+A better approach is, to have a pattern database so that once a pattern is spotted, we know the manuver needed - This is basically Korf algorith.
+An ideal solution could be, to use matrix decomposition. Any scramble of a cube can be described by a matrix equation. 
+(x1, y1, z1)                                              (x1', y1', z1') 
+(x2, y2, z2)             (     )                          (x2', y2', z2')
+(x3, y3, z3)             (     )            =             (x3', y3', z3')
+...                      (     )                          ...
+(x20, y20, z20)                                           (x20', y20', z20')
+
+Each row is represents a cubie (12 edges and 8 corners).
+The matrix is the product of multiple rotation matrix correspondent to the primitive actions.
+Now the task is to decomposing the matrix into a series of primitive rotation matrics.
+! Not sure that's possible though.
+
 ## Interesting findings
 1. Any combination of actions, repeatedly applied to a cube, will bring the cube back to its original configuration.
 
