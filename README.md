@@ -46,10 +46,15 @@ In theory, we can always rely on a search. However, given a branching factor of 
 A better approach is, to have a pattern database so that once a pattern is spotted, we know the manuver needed - This is basically Korf algorith.
 An ideal solution could be, to use matrix decomposition. Any scramble of a cube can be described by a matrix equation. 
 (x1, y1, z1)                                              (x1', y1', z1') 
+
 (x2, y2, z2)             (     )                          (x2', y2', z2')
+
 (x3, y3, z3)             (     )            =             (x3', y3', z3')
+
 ...                      (     )                          ...
+
 (x20, y20, z20)                                           (x20', y20', z20')
+
 
 Each row is represents a cubie (12 edges and 8 corners).
 The matrix is the product of multiple rotation matrix correspondent to the primitive actions.
