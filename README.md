@@ -45,6 +45,7 @@ p2 is the possibility of a edge piece, if it's is in the right place and right o
 In theory, we can always rely on a search. However, given a branching factor of 11, and we know that evern some simple deviation from a goal state may needs more than 10 steps, simple search is not the optimal solution.
 A better approach is, to have a pattern database so that once a pattern is spotted, we know the manuver needed - This is basically Korf algorith.
 An ideal solution could be, to use matrix decomposition. Any scramble of a cube can be described by a matrix equation. 
+
 (x1, y1, z1)                                              (x1', y1', z1') 
 
 (x2, y2, z2)             (     )                          (x2', y2', z2')
