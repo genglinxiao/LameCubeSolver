@@ -212,33 +212,35 @@ class Cube:
 
     def _rotate_face(self, face, matrix):
         self._rotate_pieces(self._face(face), matrix)
+        return self
 
     def _rotate_slice(self, plane, matrix):
         self._rotate_pieces(self._slice(plane), matrix)
+        return self
 
     def _rotate_pieces(self, pieces, matrix):
         for piece in pieces:
             piece.rotate(matrix)
 
     # Rubik's Cube Notation: http://ruwix.com/the-rubiks-cube/notation/
-    def L(self):  self._rotate_face(LEFT, ROT_YZ_CC)
-    def Li(self): self._rotate_face(LEFT, ROT_YZ_CW)
-    def R(self):  self._rotate_face(RIGHT, ROT_YZ_CW)
-    def Ri(self): self._rotate_face(RIGHT, ROT_YZ_CC)
-    def U(self):  self._rotate_face(UP, ROT_XZ_CW)
-    def Ui(self): self._rotate_face(UP, ROT_XZ_CC)
-    def D(self):  self._rotate_face(DOWN, ROT_XZ_CC)
-    def Di(self): self._rotate_face(DOWN, ROT_XZ_CW)
-    def F(self):  self._rotate_face(FRONT, ROT_XY_CW)
-    def Fi(self): self._rotate_face(FRONT, ROT_XY_CC)
-    def B(self):  self._rotate_face(BACK, ROT_XY_CC)
-    def Bi(self): self._rotate_face(BACK, ROT_XY_CW)
-    def M(self):  self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CC)
-    def Mi(self): self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CW)
-    def E(self):  self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CC)
-    def Ei(self): self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CW)
-    def S(self):  self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CW)
-    def Si(self): self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CC)
+    def L(self):  return self._rotate_face(LEFT, ROT_YZ_CC)
+    def Li(self): return self._rotate_face(LEFT, ROT_YZ_CW)
+    def R(self):  return self._rotate_face(RIGHT, ROT_YZ_CW)
+    def Ri(self): return self._rotate_face(RIGHT, ROT_YZ_CC)
+    def U(self):  return self._rotate_face(UP, ROT_XZ_CW)
+    def Ui(self): return self._rotate_face(UP, ROT_XZ_CC)
+    def D(self):  return self._rotate_face(DOWN, ROT_XZ_CC)
+    def Di(self): return self._rotate_face(DOWN, ROT_XZ_CW)
+    def F(self):  return self._rotate_face(FRONT, ROT_XY_CW)
+    def Fi(self): return self._rotate_face(FRONT, ROT_XY_CC)
+    def B(self):  return self._rotate_face(BACK, ROT_XY_CC)
+    def Bi(self): return self._rotate_face(BACK, ROT_XY_CW)
+    def M(self):  return self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CC)
+    def Mi(self): return self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CW)
+    def E(self):  return self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CC)
+    def Ei(self): return self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CW)
+    def S(self):  return self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CW)
+    def Si(self): return self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CC)
     def X(self):  self._rotate_pieces(self.pieces, ROT_YZ_CW)
     def Xi(self): self._rotate_pieces(self.pieces, ROT_YZ_CC)
     def Y(self):  self._rotate_pieces(self.pieces, ROT_XZ_CW)
