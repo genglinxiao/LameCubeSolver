@@ -59,7 +59,7 @@ def get_rot_from_face(face):
     return None
 
 
-class Piece:
+class Cubie:
 
     def __init__(self, pos, colors):
         """
@@ -120,9 +120,9 @@ class Cube:
     """
 
     def _from_cube(self, c):
-        self.faces = [Piece(pos=Point(p.pos), colors=p.colors) for p in c.faces]
-        self.edges = [Piece(pos=Point(p.pos), colors=p.colors) for p in c.edges]
-        self.corners = [Piece(pos=Point(p.pos), colors=p.colors) for p in c.corners]
+        self.faces = [Cubie(pos=Point(p.pos), colors=p.colors) for p in c.faces]
+        self.edges = [Cubie(pos=Point(p.pos), colors=p.colors) for p in c.edges]
+        self.corners = [Cubie(pos=Point(p.pos), colors=p.colors) for p in c.corners]
         self.pieces = self.faces + self.edges + self.corners
 
     def _assert_data(self):
@@ -153,35 +153,35 @@ class Cube:
         cube_str = "".join(x for x in cube_str if x not in string.whitespace)
         assert len(cube_str) == 54
         self.faces = (
-            Piece(pos=RIGHT, colors=(cube_str[28], None, None)),
-            Piece(pos=LEFT, colors=(cube_str[22], None, None)),
-            Piece(pos=UP, colors=(None, cube_str[4], None)),
-            Piece(pos=DOWN, colors=(None, cube_str[49], None)),
-            Piece(pos=FRONT, colors=(None, None, cube_str[25])),
-            Piece(pos=BACK, colors=(None, None, cube_str[31])))
+            Cubie(pos=RIGHT, colors=(cube_str[28], None, None)),
+            Cubie(pos=LEFT, colors=(cube_str[22], None, None)),
+            Cubie(pos=UP, colors=(None, cube_str[4], None)),
+            Cubie(pos=DOWN, colors=(None, cube_str[49], None)),
+            Cubie(pos=FRONT, colors=(None, None, cube_str[25])),
+            Cubie(pos=BACK, colors=(None, None, cube_str[31])))
         self.edges = (
-            Piece(pos=RIGHT + UP, colors=(cube_str[16], cube_str[5], None)),
-            Piece(pos=RIGHT + DOWN, colors=(cube_str[40], cube_str[50], None)),
-            Piece(pos=RIGHT + FRONT, colors=(cube_str[27], None, cube_str[26])),
-            Piece(pos=RIGHT + BACK, colors=(cube_str[29], None, cube_str[30])),
-            Piece(pos=LEFT + UP, colors=(cube_str[10], cube_str[3], None)),
-            Piece(pos=LEFT + DOWN, colors=(cube_str[34], cube_str[48], None)),
-            Piece(pos=LEFT + FRONT, colors=(cube_str[23], None, cube_str[24])),
-            Piece(pos=LEFT + BACK, colors=(cube_str[21], None, cube_str[32])),
-            Piece(pos=UP + FRONT, colors=(None, cube_str[7], cube_str[13])),
-            Piece(pos=UP + BACK, colors=(None, cube_str[1], cube_str[19])),
-            Piece(pos=DOWN + FRONT, colors=(None, cube_str[46], cube_str[37])),
-            Piece(pos=DOWN + BACK, colors=(None, cube_str[52], cube_str[43])),
+            Cubie(pos=RIGHT + UP, colors=(cube_str[16], cube_str[5], None)),
+            Cubie(pos=RIGHT + DOWN, colors=(cube_str[40], cube_str[50], None)),
+            Cubie(pos=RIGHT + FRONT, colors=(cube_str[27], None, cube_str[26])),
+            Cubie(pos=RIGHT + BACK, colors=(cube_str[29], None, cube_str[30])),
+            Cubie(pos=LEFT + UP, colors=(cube_str[10], cube_str[3], None)),
+            Cubie(pos=LEFT + DOWN, colors=(cube_str[34], cube_str[48], None)),
+            Cubie(pos=LEFT + FRONT, colors=(cube_str[23], None, cube_str[24])),
+            Cubie(pos=LEFT + BACK, colors=(cube_str[21], None, cube_str[32])),
+            Cubie(pos=UP + FRONT, colors=(None, cube_str[7], cube_str[13])),
+            Cubie(pos=UP + BACK, colors=(None, cube_str[1], cube_str[19])),
+            Cubie(pos=DOWN + FRONT, colors=(None, cube_str[46], cube_str[37])),
+            Cubie(pos=DOWN + BACK, colors=(None, cube_str[52], cube_str[43])),
         )
         self.corners = (
-            Piece(pos=RIGHT + UP + FRONT, colors=(cube_str[15], cube_str[8], cube_str[14])),
-            Piece(pos=RIGHT + UP + BACK, colors=(cube_str[17], cube_str[2], cube_str[18])),
-            Piece(pos=RIGHT + DOWN + FRONT, colors=(cube_str[39], cube_str[47], cube_str[38])),
-            Piece(pos=RIGHT + DOWN + BACK, colors=(cube_str[41], cube_str[53], cube_str[42])),
-            Piece(pos=LEFT + UP + FRONT, colors=(cube_str[11], cube_str[6], cube_str[12])),
-            Piece(pos=LEFT + UP + BACK, colors=(cube_str[9], cube_str[0], cube_str[20])),
-            Piece(pos=LEFT + DOWN + FRONT, colors=(cube_str[35], cube_str[45], cube_str[36])),
-            Piece(pos=LEFT + DOWN + BACK, colors=(cube_str[33], cube_str[51], cube_str[44])),
+            Cubie(pos=RIGHT + UP + FRONT, colors=(cube_str[15], cube_str[8], cube_str[14])),
+            Cubie(pos=RIGHT + UP + BACK, colors=(cube_str[17], cube_str[2], cube_str[18])),
+            Cubie(pos=RIGHT + DOWN + FRONT, colors=(cube_str[39], cube_str[47], cube_str[38])),
+            Cubie(pos=RIGHT + DOWN + BACK, colors=(cube_str[41], cube_str[53], cube_str[42])),
+            Cubie(pos=LEFT + UP + FRONT, colors=(cube_str[11], cube_str[6], cube_str[12])),
+            Cubie(pos=LEFT + UP + BACK, colors=(cube_str[9], cube_str[0], cube_str[20])),
+            Cubie(pos=LEFT + DOWN + FRONT, colors=(cube_str[35], cube_str[45], cube_str[36])),
+            Cubie(pos=LEFT + DOWN + BACK, colors=(cube_str[33], cube_str[51], cube_str[44])),
         )
 
         self.pieces = self.faces + self.edges + self.corners
@@ -314,6 +314,86 @@ class Cube:
                 if piece.pos != pos:
                     score += 1
         return score
+
+    def heuristic_ver1(self):
+        h = 0
+        for piece in self.pieces:
+            hp = 0
+            if piece.type != "face":
+                cubie_colors = piece.colors
+                pos = Point(0, 0, 0)
+                for c in cubie_colors:
+                    if c is not None:
+                        f = self.find_piece(c)
+                        pos += f.pos
+                # Now we have the correct coordinates of this piece in pos.
+                # We subtract to get the difference of values.
+                # Then we sum the abs of these differences.
+                diff = pos - piece.pos
+                diff = [abs(i) for i in diff]
+                hp = sum(diff)
+
+                if hp == 0:  # We have to further check if the color is correct or not.
+                    # For each piece that is in place, but wrong coloring, we have to add 4 to the heuristics.
+                    first_color = next(c for c in piece.colors if c is not None)
+                    fc_index = next((i for i, x in enumerate(piece.pos) if x), None)
+                    f = self.find_piece(first_color)
+                    f_index = next((i for i, x in enumerate(f.pos) if x), None)
+                    if fc_index != f_index:
+                        hp = 4
+
+                    pass
+
+                h += hp
+        return h
+
+    def heuristic_range(self, cubie_set):
+        h = 0
+        for piece in cubie_set:
+            hp = 0
+            if piece.type != "face":
+                cubie_colors = piece.colors
+                pos = Point(0, 0, 0)
+                for c in cubie_colors:
+                    if c is not None:
+                        f = self.find_piece(c)
+                        pos += f.pos
+                # Now we have the correct coordinates of this piece in pos.
+                # We subtract to get the difference of values.
+                # Then we sum the abs of these differences.
+                diff = pos - piece.pos
+                diff = [abs(i) for i in diff]
+                hp = sum(diff)
+
+                if hp == 0:  # We have to further check if the color is correct or not.
+                    # For each piece that is in place, but wrong coloring, we have to add 4 to the heuristics.
+                    first_color = next(c for c in piece.colors if c is not None)
+                    fc_index = next((i for i, x in enumerate(piece.pos) if x), None)
+                    f = self.find_piece(first_color)
+                    f_index = next((i for i, x in enumerate(f.pos) if x), None)
+                    if fc_index != f_index:
+                        hp = 4
+
+                    pass
+
+                h += hp
+        return h
+
+
+    def heuristic_score_by_layer(self, stage):
+        if stage==1:
+            return self.heuristic_range([piece for piece in self.pieces if piece.pos[2]==-1])
+            pass
+        elif stage==2:
+            return self.heuristic_range([piece for piece in self.pieces if piece.pos[2]<=0])
+            pass
+        elif stage==3:
+            return self.heuristic_range(self.pieces)
+            pass
+        elif stage==4:
+            pass
+
+        pass
 
     def sequence(self, move_str):
         """
