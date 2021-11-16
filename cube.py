@@ -1,5 +1,6 @@
 import string
 import textwrap
+from functools import total_ordering
 
 from math_helper import Point, Matrix
 
@@ -72,10 +73,19 @@ class Cubie:
         self.pos = pos
         self.colors = list(colors)
         self._set_piece_type()
+        colors = "".join(c for c in self.colors if c is not None)
+        self._str=f"({self.type}, {colors}, {self.pos})"
 
     def __str__(self):
-        colors = "".join(c for c in self.colors if c is not None)
-        return f"({self.type}, {colors}, {self.pos})"
+        #colors = "".join(c for c in self.colors if c is not None)
+        # return f"({self.type}, {colors}, {self.pos})"
+        return self._str
+    #
+    # def __str__(self):
+    #     return ' '.join(c for c in self.colors if c is not None)
+
+    def __eq__(self, other):
+        return other.pos == self.pos and other.colors == self.colors
 
     def _set_piece_type(self):
         if self.colors.count(None) == 2:
@@ -111,6 +121,9 @@ class Cubie:
         i, j = (i for i, x in enumerate(rot) if x != 0)
         self.colors[i], self.colors[j] = self.colors[j], self.colors[i]
 
+        colors = "".join(c for c in self.colors if c is not None)
+        self._str = f"({self.type}, {colors}, {self.pos})"
+
 
 class Cube:
     """Stores Pieces which are addressed through an x-y-z coordinate system:
@@ -118,6 +131,10 @@ class Cube:
         -y is the DOWN direction, +y is the UP direction
         -z is the BACK direction, +z is the FRONT direction
     """
+
+    def __lt__(self, other):
+        if isinstance(other, Cube):
+            return self.__str__() < other.__str__()
 
     def _from_cube(self, c):
         self.faces = [Cubie(pos=Point(p.pos), colors=p.colors) for p in c.faces]
@@ -186,6 +203,17 @@ class Cube:
 
         self.pieces = self.faces + self.edges + self.corners
 
+        # template = ("    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}")
+        self.status_str = "".join(self._color_list())
+
         self._assert_data()
 
     def is_solved(self):
@@ -207,6 +235,7 @@ class Cube:
         """
         assert axis.count(0) == 2
         return [p for p in self.pieces if p.pos.dot(axis) > 0]
+
 
     def _slice(self, plane):
         """
@@ -266,40 +295,40 @@ class Cube:
         return self._rotate_face(BACK, ROT_XY_CW)
 
     def M(self):
-        self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CC)
+        return self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CC)
 
     def Mi(self):
-        self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CW)
+        return self._rotate_slice(Y_AXIS + Z_AXIS, ROT_YZ_CW)
 
     def E(self):
-        self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CC)
+        return self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CC)
 
     def Ei(self):
-        self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CW)
+        return self._rotate_slice(X_AXIS + Z_AXIS, ROT_XZ_CW)
 
     def S(self):
-        self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CW)
+        return self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CW)
 
     def Si(self):
-        self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CC)
+        return self._rotate_slice(X_AXIS + Y_AXIS, ROT_XY_CC)
 
     def X(self):
-        self._rotate_pieces(self.pieces, ROT_YZ_CW)
+        return self._rotate_pieces(self.pieces, ROT_YZ_CW)
 
     def Xi(self):
-        self._rotate_pieces(self.pieces, ROT_YZ_CC)
+        return self._rotate_pieces(self.pieces, ROT_YZ_CC)
 
     def Y(self):
-        self._rotate_pieces(self.pieces, ROT_XZ_CW)
+        return self._rotate_pieces(self.pieces, ROT_XZ_CW)
 
     def Yi(self):
-        self._rotate_pieces(self.pieces, ROT_XZ_CC)
+        return self._rotate_pieces(self.pieces, ROT_XZ_CC)
 
     def Z(self):
-        self._rotate_pieces(self.pieces, ROT_XY_CW)
+        return self._rotate_pieces(self.pieces, ROT_XY_CW)
 
     def Zi(self):
-        self._rotate_pieces(self.pieces, ROT_XY_CC)
+        return self._rotate_pieces(self.pieces, ROT_XY_CC)
 
     def heuristic(self):
         score = 0
@@ -379,18 +408,17 @@ class Cube:
                 h += hp
         return h
 
-
     def heuristic_score_by_layer(self, stage):
-        if stage==1:
-            return self.heuristic_range([piece for piece in self.pieces if piece.pos[2]==-1])
+        if stage == 1:
+            return self.heuristic_range([piece for piece in self.pieces if piece.pos[1] == -1])
             pass
-        elif stage==2:
-            return self.heuristic_range([piece for piece in self.pieces if piece.pos[2]<=0])
+        elif stage == 2:
+            return self.heuristic_range([piece for piece in self.pieces if piece.pos[1] <= 0])
             pass
-        elif stage==3:
+        elif stage == 3:
             return self.heuristic_range(self.pieces)
             pass
-        elif stage==4:
+        elif stage == 4:
             pass
 
         pass
@@ -402,6 +430,28 @@ class Cube:
         moves = [getattr(self, name) for name in move_str.split()]
         for move in moves:
             move()
+
+        # template = ("    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}")
+        # template = ("{}{}{}"
+        #             "{}{}{}"
+        #             "{}{}{}"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}"
+        #             "{}{}{}"
+        #             "{}{}{}"
+        #             "{}{}{}")
+        # self.status_str = "" + template.format(*self._color_list()).strip()
+        self.status_str = "".join(self._color_list())
+        return self
 
     def find_piece(self, *colors):
         if None in colors:
@@ -426,7 +476,10 @@ class Cube:
         return self.get_piece(*args)
 
     def __eq__(self, other):
-        return isinstance(other, Cube) and self._color_list() == other._color_list()
+        # return isinstance(other, Cube) and self._color_list() == other._color_list()
+        # return isinstance(other, Cube) and self.status_str == other.status_str
+        return self.status_str == other.status_str
+        # return isinstance(other, Cube) and set(self.pieces)==set(other.pieces)
 
     def __ne__(self, other):
         return not (self == other)
@@ -470,18 +523,24 @@ class Cube:
     def flat_str(self):
         return "".join(x for x in str(self) if x not in string.whitespace)
 
-    def __str__(self):
-        template = ("    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}")
+    def _serial_text(self):
+        return ''.join([str(x) for x in self.pieces])
 
-        return "    " + template.format(*self._color_list()).strip()
+
+
+    def __str__(self):
+        # template = ("    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}\n"
+        #             "    {}{}{}")
+        #
+        # return "    " + template.format(*self._color_list()).strip()
+        return self.status_str
 
 
 if __name__ == '__main__':
