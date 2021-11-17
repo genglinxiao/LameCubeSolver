@@ -26,7 +26,10 @@ class LameSolver:
 
         solved = False
 
-        cube_tried = [self.cube]
+        # cube_tried = [self.cube]
+
+        cube_tried = set()
+        cube_tried.add(self.cube)
 
         while not self.open_list.empty():
             (cube, action_taken, cost_so_far) = self.open_list.get()[1]
@@ -45,7 +48,7 @@ class LameSolver:
                 new_cube = new_cube.sequence(act)
                 new_cost = cost_so_far + 1
                 if new_cube not in cube_tried:
-                    cube_tried.append(new_cube)
+                    cube_tried.add(new_cube)
                     priority = new_cost + new_cube.heuristic_score_by_layer(goal_range) / 8
                     self.open_list.put((priority, (new_cube, my_actions, new_cost)))
 
