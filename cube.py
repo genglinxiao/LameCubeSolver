@@ -526,7 +526,8 @@ class Cube:
     def _serial_text(self):
         return ''.join([str(x) for x in self.pieces])
 
-
+    def __hash__(self):
+        return hash(self.status_str)
 
     def __str__(self):
         # template = ("    {}{}{}\n"
